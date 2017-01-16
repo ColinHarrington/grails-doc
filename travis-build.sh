@@ -22,10 +22,13 @@ if [[ $TRAVIS_PULL_REQUEST == 'false' ]]; then
 	    zipName="grails-docs-$version"
 	    export RELEASE_FILE="${zipName}.zip"
 
-		git rm -rf latest/
-		mkdir -p latest
-		cp -r ../build/docs/. ./latest/
-		git add latest/*
+		latest=3.2.*
+		if [[ $version == $latest* ]] ; then
+			git rm -rf latest/
+			mkdir -p latest
+			cp -r ../build/docs/. ./latest/
+			git add latest/*
+		fi
 
 		majorVersion=${version:0:4}
 		majorVersion="${majorVersion}x"
